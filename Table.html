@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Records</title>
+  <style>
+    .styled-table {
+      border-collapse: collapse;
+      margin: 25px 0;
+      font-size: 0.9em;
+      font-family: sans-serif;
+      min-width: 400px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+    }
+    .styled-table thead tr {
+      background-color: #009879;
+      color: #ffffff;
+      text-align: left;
+    }
+    .styled-table th,
+    td {
+      padding: 12px 15px;
+    }
+    .styled-table tbody tr {
+
+      border-bottom: 1px solid #dddddd;
+    }
+    .styled-table tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+    .styled-table tbody tr:nth-of-type {
+      border-bottom: 2px solid #009879;
+    }
+    .styled-table tbody tr.active-row {
+      font-weight: bold;
+      color: #0009879;
+    }
+  </style>
+</head>
+<body>
+  <center>
+    <div>
+      <table class="styled-table">
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Email</th>
+            <th>phoneCode</th>
+            <th>phone</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $host="localhost";
+          $dbUsername="root";
+          $dbPassword="";
+          $dbName="server";
+
+          $conn=mysqli_connect($host, $dbUsername, $dbPassword, $dbName);
+
+          if ($conn) {
+          ?>
+          <script>
+            alert("connection Successful");
+          </script>
+          <?php
+          }else {
+          die("not connected".mysqli_connect_error());
+          }
+
+          $selectquery="select * from apple";
+          $query=mysqli_query($conn,$selectquery);
+          $num=mysqli_num_rows($query);
+
+          while($res=mysqli_fetch_array($query)){
+          ?>
+          <tr>
+            <td>
+              <?php echo $res['id']?>
+            </td>
+            <td>
+              <?php echo $res['username']?>
+            </td>
+            <td>
+              <?php echo $res['password']?>
+            </td>
+            <td>
+              <?php echo $res['email']?>
+            </td>
+            <td>
+              <?php echo $res['phoneCode']?>
+            </td>
+            <td>
+              <?php echo $res['phone']?>
+            </td>
+            <br>
+          </tr>
+          <?php
+          }
+          ?>
+        </tbody>
+      </table>
+    </div>
+  </center>
+</body>
+</html>
